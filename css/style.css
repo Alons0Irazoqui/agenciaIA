@@ -1,0 +1,211 @@
+/* ===== INICIO VARIABLES Y ESTILOS GLOBALES ===== */
+:root {
+    --bg-white: #ffffff;
+    --text-main: #111111;
+    --text-muted: #555555;
+}
+
+body {
+    background-color: var(--bg-white);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden; /* Vital para evitar scroll horizontal en móvil */
+}
+
+.serif {
+    font-family: 'Instrument Serif', serif;
+}
+/* ===== FIN VARIABLES Y ESTILOS GLOBALES ===== */
+
+/* ===== INICIO CANVAS 3D ===== */
+#hero-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+/* ===== FIN CANVAS 3D ===== */
+
+/* ===== INICIO MÁSCARA VIGNETTE ===== */
+.vignette-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(
+        circle at 50% 55%,
+        rgba(255, 255, 255, 0) 100%,
+        rgba(255, 255, 255, 0) 100%,
+        #ffffff 100%
+    );
+}
+
+/* Mejora mobile: un poco más de opacidad para que se lea el texto sobre el 3D */
+@media (max-width: 768px) {
+    .vignette-mask {
+        background: radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 255, 255, 0) 100%,
+            rgba(255, 255, 255, 0) 100%,
+            #ffffff00 100%
+        );
+    }
+}
+/* ===== FIN MÁSCARA VIGNETTE ===== */
+
+/* ===== INICIO BOTONES ===== */
+.btn-square-primary {
+    background-color: #111;
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-square-primary:hover {
+    background-color: #333;
+    transform: translateY(-1px);
+}
+
+.btn-square-outline {
+    background-color: transparent;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-square-outline:hover {
+    border-color: #111;
+    background-color: #fff;
+}
+/* ===== FIN BOTONES ===== */
+
+/* ===== INICIO ANIMACIONES ENTRADA ===== */
+.reveal-text {
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 30s linear infinite;
+}
+
+/* Ajuste mobile: marquee más lento en pantallas pequeñas para legibilidad */
+@media (max-width: 768px) {
+    .animate-marquee {
+        animation: marquee 20s linear infinite;
+    }
+}
+
+.bento-card {
+    opacity: 0;
+    transform: translateY(30px);
+}
+/* ===== FIN ANIMACIONES ENTRADA ===== */
+
+/* ===== INICIO ESTILOS SECCIÓN OSCURA ===== */
+.dark-glass {
+    background: linear-gradient(
+        180deg,
+        rgba(20, 20, 20, 0.8) 0%,
+        rgba(10, 10, 10, 1) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.grid-bg {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+/* ===== FIN ESTILOS SECCIÓN OSCURA ===== */
+
+/* Sección de Ventajas (Cards) */
+.advantage-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.advantage-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.advantage-card:hover::before {
+    opacity: 1;
+}
+
+.advantage-card:hover {
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+}
+
+/* Retrasos para la animación de entrada escalonada (Stagger) */
+.delay-\[0\.1s\] { transition-delay: 0.1s; }
+.delay-\[0\.2s\] { transition-delay: 0.2s; }
+.delay-\[0\.3s\] { transition-delay: 0.3s; }
+.delay-\[0\.4s\] { transition-delay: 0.4s; }
+
+/* ===== INICIO UTILIDADES SLIDER ===== */
+.select-none {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.cursor-grab {
+    cursor: grab;
+}
+
+.cursor-grab:active {
+    cursor: grabbing;
+}
+
+img {
+    pointer-events: none;
+}
+
+/* Asegurar que las imágenes no rompan el ancho en mobile */
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+/* ===== FIN UTILIDADES SLIDER ===== */

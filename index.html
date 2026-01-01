@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oly Systems | Automatización IA Corporativa</title>
+    
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script defer src="js/main.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/output.css">
+    
+    <link rel="preconnect" href="https://images.unsplash.com">
+</head>
+<body class="antialiased">
+    
+    <canvas id="hero-canvas"></canvas>
+    <div class="vignette-mask"></div>
+
+    <nav class="fixed z-50 transition-all duration-300 
+                top-0 left-0 w-full rounded-none border-b border-gray-200/50
+                lg:left-1/2 lg:-translate-x-1/2 lg:w-[calc(100%-3rem)] lg:max-w-[1100px] lg:rounded-b-2xl lg:border lg:border-gray-200/50 lg:shadow-sm
+                bg-white/70 backdrop-blur-lg supports-[backdrop-filter]:bg-white/60" 
+         id="main-nav">
+        
+        <div class="w-full h-24 lg:h-20 flex justify-between items-center px-6 relative">
+            
+            <div class="flex items-center gap-10">
+                <a href="#" class="flex items-center gap-2 z-[60] relative shrink-0">
+                    <div class="w-8 h-8 bg-black flex items-center justify-center text-white text-sm font-serif italic">O</div>
+                    <span class="text-m font-bold tracking-tight text-black">OLY SYSTEMS</span>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-6">
+                    <a href="#tech-section" class="text-[13px] font-medium text-gray-600 hover:text-black transition-colors">Tecnología</a>
+                    <a href="#solutions-section" class="text-[13px] font-medium text-gray-600 hover:text-black transition-colors">Soluciones</a>
+                    <a href="#features-section" class="text-[13px] font-medium text-gray-600 hover:text-black transition-colors">Resultados</a>
+                    <a href="#contact-section" class="text-[13px] font-medium text-gray-600 hover:text-black transition-colors">Contacto</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-6 z-[60]">
+                
+                <div class="hidden lg:flex items-center gap-4 text-gray-500 pr-6 border-r border-gray-300/50">
+                    <a href="#" class="hover:text-black transition-colors hover:scale-110 transform duration-200"><i class="ph ph-instagram-logo text-lg"></i></a>
+                    <a href="#" class="hover:text-black transition-colors hover:scale-110 transform duration-200"><i class="ph ph-facebook-logo text-lg"></i></a>
+                    <a href="#" class="hover:text-black transition-colors hover:scale-110 transform duration-200"><i class="ph ph-linkedin-logo text-lg"></i></a>
+                    <a href="#" class="hover:text-black transition-colors hover:scale-110 transform duration-200"><i class="ph ph-youtube-logo text-lg"></i></a>
+                    <a href="#" class="hover:text-black transition-colors hover:scale-110 transform duration-200"><i class="ph ph-tiktok-logo text-lg"></i></a>
+                </div>
+
+                <div class="hidden lg:block">
+                    <button class="btn-square-primary px-5 py-2.5 text-[11px] uppercase tracking-wide font-medium shadow-lg shadow-gray-200/50">
+                        Agendar Diagnóstico
+                    </button>
+                </div>
+
+                <button id="menu-toggle" class="lg:hidden p-2 text-2xl focus:outline-none text-black relative w-10 h-10 flex items-center justify-center">
+                    <i class="ph ph-list transition-all duration-300 scale-100 absolute" id="icon-open"></i>
+                    <i class="ph ph-x transition-all duration-300 scale-0 opacity-0 absolute" id="icon-close"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="mobile-menu" class="fixed inset-0 bg-white z-[55] flex flex-col pt-32 px-6 h-screen w-screen transform -translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] lg:hidden rounded-none">
+            <div class="flex flex-col items-start gap-6 mb-12">
+                <a href="#tech-section" class="mobile-link text-3xl font-medium tracking-tight text-gray-900 hover:text-gray-500 transition-colors">Tecnología</a>
+                <a href="#solutions-section" class="mobile-link text-3xl font-medium tracking-tight text-gray-900 hover:text-gray-500 transition-colors">Soluciones</a>
+                <a href="#features-section" class="mobile-link text-3xl font-medium tracking-tight text-gray-900 hover:text-gray-500 transition-colors">Resultados</a>
+                <a href="#contact-section" class="mobile-link text-3xl font-medium tracking-tight text-gray-900 hover:text-gray-500 transition-colors">Contacto</a>
+            </div>
+
+            <button class="btn-square-primary w-full py-4 text-xs uppercase tracking-widest mb-auto">
+                Agendar Diagnóstico
+            </button>
+
+            <div class="border-t border-gray-100 w-full py-8 mt-4">
+                <p class="text-[10px] uppercase tracking-widest text-gray-400 mb-4">Síguenos</p>
+                <div class="flex gap-6 text-2xl text-gray-800 justify-between px-4">
+                    <a href="#"><i class="ph ph-instagram-logo"></i></a>
+                    <a href="#"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph ph-linkedin-logo"></i></a>
+                    <a href="#"><i class="ph ph-youtube-logo"></i></a>
+                    <a href="#"><i class="ph ph-tiktok-logo"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative w-full lg:justify-between lg:pt-32 lg:pb-10 xl:pt-0 xl:pb-0 xl:justify-center h-screen px-6 flex flex-col items-center justify-center z-10">
+        <div class="max-w-full text-center">
+            
+            <div class="reveal-text mb-6 inline-block border border-gray-200 bg-white px-3 py-1 rounded-sm">
+                <span class="animation-pulse text-[10px] font-semibold text-gray-500 tracking-widest uppercase">Para empresas con +500 mensajes/día</span>
+            </div>
+            
+            <h1 class="reveal-text text-6xl md:text-6xl font-medium tracking-tight text-gray-900 mb-6 leading-[1.1]">
+                Su equipo de soporte <br>
+                <span class="serif italic font-light text-gray-800">cuesta demasiado.</span>
+            </h1>
+            
+            <p class="reveal-text text-base md:text-base text-gray-500 max-w-lg mx-auto mb-8 font-light leading-relaxed">
+                Sustituya procesos manuales costosos por agentes de IA autónomos. <br>Reduzca su nómina operativa y responda al 100% de sus leads en segundos.
+            </p>
+            
+            <div class="reveal-text flex flex-row gap-3 justify-center">
+                <button class="btn-square-primary px-6 py-2.5 text-sm">
+                    Agendar Diagnóstico
+                </button>
+                <button class="btn-square-outline px-6 py-2.5 text-sm">
+                    Ver Casos de Éxito
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="relative w-full bg-white border-b border-gray-100 py-8 md:py-12 overflow-hidden z-20">
+        <p class="text-center text-[14px] uppercase tracking-[0.2em] text-gray-400 mb-6 md:mb-8 font-medium px-4">Automatizando líderes de industria</p>
+        <div class="flex whitespace-nowrap marquee-container opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            <div class="flex gap-12 md:gap-16 items-center animate-marquee pl-4 md:pl-16">
+                <span class="text-xl md:text-xl font-bold tracking-tighter text-gray-800">MEDICORP</span>
+                <span class="text-xl md:text-xl font-serif italic text-gray-800">DentalFix</span>
+                <span class="text-xl md:text-xl font-bold tracking-widest text-gray-800">LOGISTIKA</span>
+                <span class="text-xl md:text-xl font-semibold text-gray-800">FinTech One</span>
+                <span class="text-xl md:text-xl font-mono text-gray-800">/// AutoGroup</span>
+                <span class="text-xl md:text-xl font-bold tracking-tighter text-gray-800">MEDICORP</span>
+                <span class="text-xl md:text-xl font-serif italic text-gray-800">DentalFix</span>
+                <span class="text-xl md:text-xl font-bold tracking-widest text-gray-800">LOGISTIKA</span>
+                <span class="text-xl md:text-xl font-semibold text-gray-800">FinTech One</span>
+                <span class="text-xl md:text-xl font-mono text-gray-800">/// AutoGroup</span>
+            </div>
+            <div class="flex gap-12 md:gap-16 items-center animate-marquee pl-4 md:pl-16" aria-hidden="true">
+                <span class="text-xl md:text-xl font-bold tracking-tighter text-gray-800">MEDICORP</span>
+                <span class="text-xl md:text-xl font-serif italic text-gray-800">DentalFix</span>
+                <span class="text-xl md:text-xl font-bold tracking-widest text-gray-800">LOGISTIKA</span>
+                <span class="text-xl md:text-xl font-semibold text-gray-800">FinTech One</span>
+                <span class="text-xl md:text-xl font-mono text-gray-800">/// AutoGroup</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="relative z-20 bg-white py-20 md:py-28 px-6" id="solutions-section">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-5xl md:text-5xl leading-tight font-medium text-gray-900 scroll-reveal">
+                El caos de la mensajería <br>
+                <span class="text-gray-400">frena su crecimiento. </span>
+                <span class="serif italic text-black">Nosotros lo eliminamos.</span>
+            </h2>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12 scroll-reveal">
+                <div>
+                    <p class="text-gray-600 text-base leading-relaxed">
+                        Si su empresa gasta más de $1,000 USD al mes en personal solo para responder preguntas frecuentes, agendar citas o cualificar leads, tiene una fuga de capital. Los humanos se cansan, cometen errores y duermen. Nuestros sistemas, no.
+                    </p>
+                </div>
+                <div class="border-l border-gray-200 pl-6 md:pl-8">
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-3">
+                            <i class="ph ph-check-circle text-gray-900"></i>
+                            <span class="text-base font-medium">Atención 24/7 sin pagos extra</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="ph ph-check-circle text-gray-900"></i>
+                            <span class="text-base font-medium">Gestión de +10,000 mensajes/día</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="ph ph-check-circle text-gray-900"></i>
+                            <span class="text-base font-medium">Integración CRM Directa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-20 bg-[#050505] text-white py-20 md:py-32 overflow-hidden" id="tech-section">
+        <div class="absolute inset-0 grid-bg opacity-20 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-blue-900 rounded-full blur-[100px] md:blur-[150px] opacity-20 pointer-events-none"></div>
+
+        <div class="max-w-[1200px] mx-auto px-6 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                
+                <div class="order-2 lg:order-1 scroll-reveal">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-800 bg-gray-900/50 mb-6">
+                        <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                        <span class="text-[14px] uppercase tracking-widest text-gray-400">Oly Intelligence Core</span>
+                    </div>
+                    
+                    <h2 class="text-5xl md:text-5xl font-medium tracking-tight mb-6 leading-tight">
+                        Más que un Chatbot. <br>
+                        <span class="serif italic text-gray-400">Un Empleado Digital.</span>
+                    </h2>
+                    
+                    <p class="text-gray-400 text-base leading-relaxed mb-8 max-w-md">
+                        Nuestros agentes no siguen un guion rígido. Entienden el contexto, negocian horarios, re-agendan citas y detectan la intención de compra con precisión humana.
+                    </p>
+
+                    <div class="space-y-4 text-sm text-gray-300">
+                        <div class="p-4 border border-gray-800 rounded bg-white/5 hover:bg-white/10 transition-colors cursor-default">
+                            <div class="flex items-center gap-3 mb-1">
+                                <i class="ph ph-brain text-white"></i>
+                                <span class="font-semibold text-white text-base ">Razonamiento Contextual</span>
+                            </div>
+                            <p class="text-base text-gray-500">Recuerda conversaciones pasadas y preferencias.</p>
+                        </div>
+                        <div class="p-4 border border-gray-800 rounded bg-white/5 hover:bg-white/10 transition-colors cursor-default">
+                            <div class="flex items-center gap-3 mb-1">
+                                <i class="ph ph-lightning text-white"></i>
+                                <span class="font-semibold text-white text-base">Respuesta Inmediata</span>
+                            </div>
+                            <p class="text-base text-gray-500">Cero tiempos de espera. Aumente su tasa de cierre.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2 delay-100">
+                    <div class="dark-glass rounded-xl p-1 overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
+                        <div class="bg-[#0a0a0a] rounded-lg p-4 md:p-6 font-mono text-[10px] md:text-xs overflow-x-auto relative group">
+                            <div class="flex gap-2 mb-4 opacity-50">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+
+                            <div class="space-y-2 whitespace-nowrap">
+                                <p class="text-gray-500 text-sm"># Analizando mensaje entrante...</p>
+                                <p class="text-purple-400 text-xs flex flex-wrap">user_msg: <span class="text-green-400">"Quiero agendar, pero que no sea caro"</span></p>
+                                <br>
+                                <p class="text-gray-500 text-sm">// Oly Agent Processing</p>
+                                <div class="pl-4 border-l border-gray-800">
+                                    <p class="text-blue-400 text-sm">Intent: <span class="text-yellow-200">SALES_OBJECTION</span></p>
+                                    <p class="text-blue-400 text-sm">Sentiment: <span class="text-yellow-200">CONCERNED</span></p>
+                                    <p class="text-blue-400 text-sm">Action: <span class="text-white">TRIGGER_VALUE_FLOW</span></p>
+                                </div>
+                                <br>
+                                <p class="text-blue-400 text-xs">return <span class="text-white">response.generate()</span>;</p>
+                            </div>
+
+                            <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-20 bg-gray-50 py-20 md:py-32 px-6 border-y border-gray-200" id="features-section">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="mb-12 md:mb-16">
+                <span class="text-[14px] uppercase tracking-widest border border-gray-300 px-2 py-1 rounded-sm text-gray-600 bg-white">Resultados</span>
+                <h3 class="text-4xl mt-4 font-medium tracking-tight">Infraestructura diseñada para vender</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+                
+                <div class="md:col-span-2 row-span-2 bg-white p-6 md:p-8 rounded-lg border border-gray-200 hover:border-gray-400 transition-colors duration-300 group overflow-hidden relative bento-card">
+                    
+                    <div class="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
+                        <i class="ph ph-chart-bar text-9xl"></i>
+                    </div>
+
+                    <h4 class="text-xl font-medium mb-2 relative z-10">ROI en Tiempo Real</h4>
+                    <p class="text-gray-500 text-base max-w-sm relative z-10">No pague a ciegas. Nuestro dashboard le muestra exactamente cuánto dinero ha ahorrado y generado la IA mes a mes.</p>
+                    
+                    <div class="mt-8 md:mt-12 w-full h-56 md:h-64 flex items-end justify-between gap-2 px-4 relative z-10">
+                        <div class="w-full bg-gray-100 h-full rounded-sm relative overflow-hidden border border-gray-100">
+                             <div class="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-gray-200 to-transparent"></div>
+                             
+                             <div class="absolute bottom-0 left-[10%] w-[12%] h-[30%] bg-black transition-all duration-1000 group-hover:h-[50%]"></div>
+                             <div class="absolute bottom-0 left-[30%] w-[12%] h-[50%] bg-black transition-all duration-1000 delay-75 group-hover:h-[80%]"></div>
+                             <div class="absolute bottom-0 left-[50%] w-[12%] h-[25%] bg-black transition-all duration-1000 delay-100 group-hover:h-[60%]"></div>
+                             <div class="absolute bottom-0 left-[70%] w-[12%] h-[65%] bg-black transition-all duration-1000 delay-150 group-hover:h-[95%]"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 md:p-8 rounded-lg border border-gray-200 hover:border-gray-400 transition-colors duration-300 group bento-card">
+                    <i class="ph ph-shield-check text-2xl mb-4 text-gray-800"></i>
+                    <h4 class="text-xl font-medium mb-1">Escalabilidad Infinita</h4>
+                    <p class="text-gray-500 text-base">Pase de 50 a 5,000 conversaciones diarias sin contratar a nadie más.</p>
+                </div>
+
+                <div class="bg-black text-white p-6 md:p-8 rounded-lg border border-gray-800 hover:border-gray-600 transition-colors duration-300 group relative overflow-hidden bento-card">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+                    <div class="relative z-10">
+                        <i class="ph ph-plugs-connected text-2xl mb-4 text-gray-300"></i>
+                        <h4 class="text-xl font-medium mb-1">Conexión Universal</h4>
+                        <p class="text-gray-400 text-base">WhatsApp, Instagram, Web, CRM. Todo centralizado.</p>
+                        <div class="mt-4 font-mono text-[15px] text-green-400 bg-gray-900 p-2 rounded border border-gray-800 overflow-hidden">
+                            > oly.connect(crm_id)<br>
+                            > Status: Connected
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-20 bg-white py-16 px-6">
+        <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+            
+            <div class="stat-item border-l-0 md:border-l-2 border-transparent hover:border-black pl-0 md:pl-4 transition-all duration-300">
+                <span class="block text-7xl font-bold tracking-tighter mb-2 count-up" data-target="1000">0</span>
+                <span class="text-base font-medium uppercase tracking-widest text-gray-500">Dólares Ahorrados/Mes</span>
+                <p class="text-base text-gray-400 mt-2">Promedio por cliente al sustituir personal L1.</p>
+            </div>
+
+            <div class="stat-item border-l-0 md:border-l-2 border-transparent hover:border-black pl-0 md:pl-4 transition-all duration-300">
+                <span class="block text-7xl font-bold tracking-tighter mb-2 flex items-baseline justify-center md:justify-start">
+                    <span class="count-up" data-target="24">0</span>/7
+                </span>
+                <span class="text-base font-medium uppercase tracking-widest text-gray-500">Disponibilidad Total</span>
+                <p class="text-base text-gray-400 mt-2">Sin bajas por enfermedad ni vacaciones.</p>
+            </div>
+
+            <div class="stat-item border-l-0 md:border-l-2 border-transparent hover:border-black pl-0 md:pl-4 transition-all duration-300">
+                <span class="block text-7xl font-bold tracking-tighter mb-2 flex items-baseline justify-center md:justify-start">
+                    <span class="count-up" data-target="100">0</span>%
+                </span>
+                <span class="text-base font-medium uppercase tracking-widest text-gray-500">Tasa de Respuesta</span>
+                <p class="text-base text-gray-400 mt-2">Ningún cliente potencial se queda sin atención.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="relative bg-white py-20 md:py-28 overflow-hidden border-t border-gray-100 select-none" id="industries-section">
+        <div class="max-w-[1600px] mx-auto px-6">
+            
+            <div class="flex flex-col lg:flex-row gap-12 items-center justify-center">
+                
+                <div class="w-full lg:w-[30%] relative z-20 lg:sticky lg:top-40 lg:pl-12 text-center lg:text-left">
+                    <span class="text-[15px] uppercase tracking-[0.2em] text-blue-600 font-semibold mb-4 block">Adaptabilidad</span>
+                    
+                    <h2 class="text-4xl font-medium tracking-tight text-gray-900 mb-4 leading-tight">
+                        Expertos en su sector. <br>
+                        <span class="serif italic text-gray-400">Sin entrenamiento.</span>
+                    </h2>
+                    
+                    <p class="text-gray-500 text-base md:text-sm leading-relaxed mb-8 max-w-sm mx-auto lg:mx-0">
+                        Nuestra IA ya está pre-entrenada con los flujos operativos de las industrias más exigentes. Plug & Play.
+                    </p>
+
+                    <button class="btn-square-primary px-6 py-3 text-base flex items-center gap-3 group shadow-xl transition-transform active:scale-95 mx-auto lg:mx-0">
+                        <span>Consultar Mi Industria</span>
+                        <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+
+                <div class="lg:w-[70%] w-full relative">
+                    <div class="absolute -top-8 right-4 md:right-8 flex gap-2 opacity-40 pointer-events-none z-30">
+                        <div class="flex items-center gap-2 text-[10px] uppercase tracking-widest font-medium">
+                            <i class="ph ph-hand-grabbing text-base"></i> Deslizar
+                        </div>
+                    </div>
+
+                    <div id="slider-track" class="flex gap-4 md:gap-6 overflow-x-auto pb-8 hide-scrollbar cursor-grab active:cursor-grabbing" style="scroll-behavior: auto;"> 
+                        
+                        <div class="slider-card min-w-[280px] md:min-w-[600px] group relative pointer-events-none">
+                            <div class="relative h-[450px] md:h-[600px] rounded-xl overflow-hidden bg-gray-900 shadow-md transition-transform duration-500 group-hover:scale-[1.01]">
+                                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1200&auto=format&fit=crop" 
+                                     loading="lazy" decoding="async"
+                                     class="w-full h-full object-cover select-none opacity-90 transition-opacity duration-500 group-hover:opacity-100" draggable="false" alt="Real Estate">
+                                
+                                <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest z-20 shadow-sm text-white">
+                                    +40% Leads
+                                </div>
+
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+
+                                <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full z-20">
+                                    <h3 class="text-3xl font-medium text-white mb-2 leading-tight">Inmobiliaria & Real Estate</h3>
+                                    <p class="text-sm text-gray-200 leading-relaxed max-w-lg font-light">
+                                        Cualificación de inquilinos, agenda de visitas automática y tours virtuales guiados.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider-card min-w-[280px] md:min-w-[600px] group relative pointer-events-none">
+                            <div class="relative h-[450px] md:h-[600px] rounded-xl overflow-hidden bg-gray-900 shadow-md transition-transform duration-500 group-hover:scale-[1.01]">
+                                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop" 
+                                     loading="lazy" decoding="async"
+                                     class="w-full h-full object-cover select-none opacity-90 transition-opacity duration-500 group-hover:opacity-100" draggable="false" alt="Healthcare">
+                                
+                                <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest z-20 shadow-sm text-white">
+                                    HIPAA Ready
+                                </div>
+
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+
+                                <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full z-20">
+                                    <h3 class="text-3xl font-medium text-white mb-2 leading-tight">Salud & Clínicas</h3>
+                                    <p class="text-sm text-gray-200 leading-relaxed max-w-lg font-light">
+                                        Triaje de pacientes, recordatorios de citas y reactivación de base de datos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider-card min-w-[280px] md:min-w-[600px] group relative pointer-events-none">
+                            <div class="relative h-[450px] md:h-[600px] rounded-xl overflow-hidden bg-gray-900 shadow-md transition-transform duration-500 group-hover:scale-[1.01]">
+                                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1200&auto=format&fit=crop" 
+                                     loading="lazy" decoding="async"
+                                     class="w-full h-full object-cover select-none opacity-90 transition-opacity duration-500 group-hover:opacity-100" draggable="false" alt="Finance">
+                                
+                                <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest z-20 shadow-sm text-white">
+                                    Zero Fraud
+                                </div>
+
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+
+                                <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full z-20">
+                                    <h3 class="text-3xl font-medium text-white mb-2 leading-tight">Banca & Finanzas</h3>
+                                    <p class="text-sm text-gray-200 leading-relaxed max-w-lg font-light">
+                                        Soporte transaccional seguro y procesos KYC automatizados.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider-card min-w-[280px] md:min-w-[600px] group relative pointer-events-none">
+                            <div class="relative h-[450px] md:h-[600px] rounded-xl overflow-hidden bg-gray-900 shadow-md transition-transform duration-500 group-hover:scale-[1.01]">
+                                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop" 
+                                     loading="lazy" decoding="async"
+                                     class="w-full h-full object-cover select-none opacity-90 transition-opacity duration-500 group-hover:opacity-100" draggable="false" alt="Logistics">
+                                
+                                <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-sm font-bold uppercase tracking-widest z-20 shadow-sm text-white">
+                                    Live Tracking
+                                </div>
+
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10"></div>
+
+                                <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full z-20">
+                                    <h3 class="text-3xl font-medium text-white mb-2 leading-tight">Logística & Supply</h3>
+                                    <p class="text-sm text-gray-200 leading-relaxed max-w-lg font-light">
+                                        Coordinación automática con conductores y optimización de rutas en vivo.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    
+    <section class="relative z-20 bg-gray-50 py-20 px-6 border-t border-gray-200">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="text-5xl md:text-5xl font-medium tracking-tight text-gray-900 mb-6">
+                    ¿Por qué Oly Systems?
+                </h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-base">No somos una herramienta más. Somos su socio estratégico para reducir costos operativos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="advantage-card bg-white p-8 rounded-xl border border-gray-200 hover:border-blue-300 transition-all duration-300 group delay-[0.1s]">
+                    <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
+                        <i class="ph ph-lightning text-2xl text-blue-600"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Implementación Flash</h4>
+                    <p class="text-gray-500 text-base leading-relaxed">Su sistema funcionando en menos de 14 días. Sin interrumpir su operación actual.</p>
+                </div>
+
+                <div class="advantage-card bg-white p-8 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-300 group  delay-[0.2s]">
+                    <div class="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-purple-100 transition-colors">
+                        <i class="ph ph-sliders-horizontal text-2xl text-purple-600"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Auditoría Total</h4>
+                    <p class="text-gray-500 text-base leading-relaxed">Mantenga el control absoluto. Revise cada decisión que toma el agente en tiempo real.</p>
+                </div>
+
+                <div class="advantage-card bg-white p-8 rounded-xl border border-gray-200 hover:border-emerald-300 transition-all duration-300 group delay-[0.3s]">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-emerald-100 transition-colors">
+                        <i class="ph ph-wallet text-2xl text-emerald-600"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Cost-Effective</h4>
+                    <p class="text-gray-500 text-base leading-relaxed">Cuesta una fracción de lo que pagaría por un empleado humano, y trabaja el triple.</p>
+                </div>
+
+                <div class="advantage-card bg-white p-8 rounded-xl border border-gray-200 hover:border-orange-300 transition-all duration-300 group delay-[0.4s]">
+                    <div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-orange-100 transition-colors">
+                        <i class="ph ph-headset text-2xl text-orange-600"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-3">Soporte Premium</h4>
+                    <p class="text-gray-500 text-base leading-relaxed">No lo dejamos solo. Nuestro equipo monitorea el rendimiento de su IA mensualmente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-20 py-40 px-6 flex flex-col items-center justify-center text-center overflow-hidden" id="contact-section">
+        <div class="absolute inset-0 bg-gray-50 -z-10">
+            <div class="absolute w-full h-full bg-[radial-gradient(#e5e7eb_2px,transparent_2px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_90%,transparent_100%)]"></div>
+        </div>
+
+        <h2 class="text-5xl md:text-7xl font-medium tracking-tighter mb-8 max-w-3xl cta-text">
+            Deje de perder dinero en <br>
+            <span class="serif italic text-gray-500">tareas repetitivas.</span>
+        </h2>
+        
+        <div class="flex flex-col sm:flex-row gap-4 cta-buttons opacity-0 translate-y-10 w-full sm:w-auto">
+            <button class="btn-square-primary px-8 py-4 text-base bg-black hover:bg-gray-800 text-white transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 w-full sm:w-auto">
+                Agendar Diagnóstico
+            </button>
+            <button class="btn-square-outline px-8 py-4 text-base bg-white hover:bg-gray-50 transition-all w-full sm:w-auto">
+                Ver Demo
+            </button>
+        </div>
+    </section>
+
+    <footer class="relative z-20 bg-white border-t border-gray-100 py-16 px-6 text-sm">
+        <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="col-span-1 md:col-span-1">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-5 h-5 bg-black flex items-center justify-center text-white text-[18px] font-serif italic">O</div>
+                    <span class="font-bold tracking-tight text-lg">OLY SYSTEMS</span>
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    Ayudamos a empresas con alto volumen de mensajes a automatizar su atención al cliente y ventas mediante Inteligencia Artificial.
+                </p>
+                <div class="mt-6 flex gap-4 text-gray-400">
+                    <i class="ph ph-linkedin-logo hover:text-black cursor-pointer transition-colors text-4xl"></i>
+                    <i class="ph ph-instagram-logo hover:text-black cursor-pointer transition-colors text-4xl"></i>
+                </div>
+            </div>
+            
+            <div>
+                <h5 class="font-semibold mb-4 text-xl">Soluciones</h5>
+                <ul class="space-y-3 text-gray-500">
+                    <li><a href="#" class="hover:text-black transition-colors text-sm">Para Clínicas</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors text-sm">Para Real Estate</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors text-sm">Para E-commerce</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="font-semibold mb-4 text-xl">Empresa</h5>
+                <ul class="space-y-3 text-gray-500">
+                    <li><a href="#" class="hover:text-black transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">Casos de Éxito</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">Blog</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h5 class="font-semibold mb-4 text-xl">Legal</h5>
+                <ul class="space-y-3 text-gray-500">
+                    <li><a href="#" class="hover:text-black transition-colors">Privacidad</a></li>
+                    <li><a href="#" class="hover:text-black transition-colors">Términos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-[1400px] mx-auto mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between text-base text-gray-400 gap-4 text-center md:text-left">
+            <span>&copy; 2026 Oly Systems. All rights reserved.</span>
+            <span>Made in Mexico.</span>
+        </div>
+    </footer>
+    </body>
+</html>
